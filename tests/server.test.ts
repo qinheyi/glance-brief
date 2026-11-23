@@ -54,3 +54,9 @@ test('Telegram updates become inbox cards, filtered by allowed chats', async () 
   assert.equal(items[0].subject, 'Telegram · Acme pilot')
   assert.equal(items[0].tgMessageId, 7)
 })
+
+test('Telegram drafts are chat style (no greeting / sign-off lines)', async () => {
+  const { chatStyle } = await import('../server/llm.ts')
+  assert.equal(chatStyle('Hi Leo,\nYes, tell Maya it ships Thursday.\nQin', 'Qin Heyi'), 'Yes, tell Maya it ships Thursday.')
+  assert.equal(chatStyle('On it.', 'Qin Heyi'), 'On it.')
+})

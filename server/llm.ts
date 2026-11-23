@@ -42,6 +42,15 @@ export function parseVariants(raw: string): DraftVariant[] | null {
   }
 }
 
+/** Telegram replies are chat messages: drop an email-style greeting or sign-off if the model added one. */
+export function chatStyle(body: string, userName: string): string {
+  const first = userName.split(/\s+/)[0].toLowerCase()
+  const lines = body.split('\n').map(l => l.trim()).filter(Boolean)
+  while (lines.length > 1 && [first, userName.toLowerCase()].includes(lines[lines.length - 1].replace(/[^\p{L} ]/gu, '').trim().toLowerCase())) lines.pop()
+  if (lines.length > 1 && /^(hi|hey|hello)\b[^,]*,$/i.test(lines[0])) lines.shift()
+  return lines.join(' ')
+}
+
 export async function chat(p: Provider, system: string, user: string, maxTokens = 2000): Promise<string> {
   const r = await fetch(p.url, {
     method: 'POST',
@@ -70,7 +79,7 @@ export async function draft(req: DraftRequest, env: Record<string, string | unde
     const raw = await chat(p, SYSTEM, user)
     const variants = parseVariants(raw)
     if (!variants) throw new Error(`unparseable LLM output (${raw.length} chars)`)
-    return { engine: p.name, variants }
+    return { engine: p.name, variants: req.channel === 'telegram' ? variants.map(v => ({ ...v, body: chatStyle(v.body, req.userName) })) : variants }
   } catch (e) {
     console.warn('[server] LLM draft failed, template used:', String(e))
     return templateDraft(req)
