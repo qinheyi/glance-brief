@@ -92,7 +92,7 @@ Every key is optional. Set them as environment variables for `npm run server`; n
 | `GLANCE_DEMO=1` | Force demo data even when accounts are linked |
 
 ```bash
-npm test        # 17 unit tests: gestures, confirm-before-send, triage, display fit, parsing, MIME, Telegram
+npm test        # 16 unit tests: gestures, confirm-before-send, triage, display fit, parsing, MIME, Telegram
 npm run build   # type-check + production bundle
 ```
 
