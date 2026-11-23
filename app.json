@@ -1,0 +1,21 @@
+{
+  "package_id": "io.github.qinheyi.glancebrief",
+  "edition": "202601",
+  "name": "Glance Brief",
+  "version": "0.1.0",
+  "min_app_version": "2.2.10",
+  "min_sdk_version": "0.0.16",
+  "entrypoint": "index.html",
+  "permissions": [
+    {
+      "name": "network",
+      "desc": "Fetches your next meetings and inbox and drafts replies through the Glance Brief backend.",
+      "whitelist": ["http://localhost:8787"]
+    },
+    {
+      "name": "g2-microphone",
+      "desc": "Records your spoken reply while you long-press, to turn it into an email draft."
+    }
+  ],
+  "supported_languages": ["en"]
+}

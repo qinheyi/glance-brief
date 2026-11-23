@@ -1,0 +1,32 @@
+{
+  "name": "glance-brief",
+  "version": "0.1.0",
+  "description": "Meeting briefs and a 30-second inbox for Even Realities G2 smart glasses",
+  "scripts": {
+    "dev": "vite",
+    "server": "node server/index.ts",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "node --test tests/*.test.ts",
+    "simulate": "evenhub-simulator http://localhost:5173",
+    "pack": "npm run build && evenhub pack app.json dist -o glance-brief.ehpk",
+    "start": "node server/index.ts"
+  },
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@evenrealities/even_hub_sdk": "^0.0.16",
+    "@evenrealities/pretext": "^0.1.4"
+  },
+  "devDependencies": {
+    "@evenrealities/evenhub-cli": "^0.2.0",
+    "@evenrealities/evenhub-simulator": "^0.9.5",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.18"
+  }
+}

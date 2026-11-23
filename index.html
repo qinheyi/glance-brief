@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <title>Glance Brief · G2</title>
+    <style>
+      html, body { margin: 0; background: #232323; color: #e5e5e5; font: 14px/1.45 -apple-system, BlinkMacSystemFont, system-ui, sans-serif; touch-action: manipulation; -webkit-text-size-adjust: 100%; overscroll-behavior: none; }
+      main { max-width: 640px; margin: 0 auto; padding: 16px; }
+      h1 { font-size: 18px; margin: 4px 0; } .sub { color: #a3a3a3; margin: 0 0 12px; }
+      .g2 { width: 576px; max-width: 100%; aspect-ratio: 2 / 1; background: #000; border-radius: 10px; box-shadow: 0 0 0 2px #1b3; overflow: hidden; display: grid; grid-template-rows: 40px 1fr 40px; }
+      .g2 pre { margin: 0; padding: 6px 10px; color: #4dff7a; font: 15px/27px ui-monospace, Menlo, monospace; white-space: pre-wrap; overflow: hidden; text-shadow: 0 0 6px rgba(77,255,122,.45); }
+      .g2 .hdr { color: #8dffa8; } .g2 .ftr { color: #2fa851; }
+      .pad { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+      .pad button { background: #333; color: #e5e5e5; border: 1px solid #555; border-radius: 8px; padding: 10px 12px; font-size: 14px; }
+      .pad button:active { background: #1b3; color: #000; }
+      .keys, #status, footer { color: #a3a3a3; font-size: 12px; }
+      footer a { color: #8dffa8; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Glance Brief</h1>
+      <p class="sub">Meeting briefs and a 30-second inbox on Even Realities G2. Read at a glance, reply with one confirmed tap.</p>
+      <div id="mirror"></div>
+      <p id="status">Loading…</p>
+      <footer>Demo data is fictional. Nothing is sent unless you tap to confirm. <a href="https://github.com/qinheyi/glance-brief">Source on GitHub</a></footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
