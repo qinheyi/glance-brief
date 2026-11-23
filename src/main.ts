@@ -9,8 +9,13 @@ function hasHost(): boolean {
 }
 
 async function bridgeOrNull(ms: number): Promise<EvenAppBridge | null> {
-  // Outside the Even App / simulator there is no native host; don't wait forever.
-  const timeout = new Promise<null>(r => setTimeout(() => r(null), ms))
+  // Outside the Even App / simulator there is no native host: the SDK would still
+  // hand out a bridge object, so detect the host handler first (it may be
+  // injected shortly after load) and fall back to the browser mirror.
+  const t0 = Date.now()
+  while (!hasHost() && Date.now() - t0 < ms) await new Promise(r => setTimeout(r, 50))
+  if (!hasHost()) return null
+  const timeout = new Promise<null>(r => setTimeout(() => r(null), 4000))
   return Promise.race([waitForEvenAppBridge(), timeout])
 }
 
@@ -18,7 +23,7 @@ async function boot() {
   const status = document.getElementById('status')!
   const ws = await loadWorkspace()
   const app = new GlanceApp(ws)
-  const bridge = hasHost() ? await bridgeOrNull(4000) : await bridgeOrNull(800)
+  const bridge = await bridgeOrNull(1500)
 
   if (bridge) await attachGlasses(bridge, app)
   attachMirror(app, document.getElementById('mirror')!, !bridge)
